@@ -3,6 +3,9 @@ package site.kpokogujl.tests;
 import com.codeborne.selenide.Configuration;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import site.kpokogujl.pages.AutomationPracticeFormPage;
 
 
@@ -10,6 +13,12 @@ public class HomeWorkFiveTest {
     @Test
     void firstTest(){
         Configuration.browserSize = "1920x1080";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        Configuration.browserCapabilities = capabilities;
 
         Faker faker = new Faker();
 
