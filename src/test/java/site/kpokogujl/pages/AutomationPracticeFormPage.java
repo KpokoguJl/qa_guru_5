@@ -1,6 +1,9 @@
 package site.kpokogujl.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import site.kpokogujl.elements.Button;
+import site.kpokogujl.elements.GenderRadioButton;
+import site.kpokogujl.elements.InputTextBox;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -8,12 +11,14 @@ import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
 
 public class AutomationPracticeFormPage {
-    SelenideElement firstName = $("#firstName"),
-        lastName = $("#lastName"),
-        userEmail = $("#userEmail"),
-        userNumber = $("#userNumber"),
-        userAddress = $("#currentAddress"),
-        results = $(".table-responsive");
+    InputTextBox firstName = new InputTextBox("Имя", $("#firstName")),
+        lastName = new InputTextBox("Фамилия", $("#lastName")),
+        userEmail = new InputTextBox("имейл", $("#userEmail")),
+        userNumber = new InputTextBox("номер телефона", $("#userNumber")),
+        userAddress = new InputTextBox("адрес", $("#currentAddress"));
+    Button submit = new Button("submit", $("#submit"));
+    GenderRadioButton genderRadioButton = new GenderRadioButton("gender", $("#genterWrapper"));
+    SelenideElement results = $(".table-responsive");
 
 
     public AutomationPracticeFormPage openPage(){
@@ -41,7 +46,7 @@ public class AutomationPracticeFormPage {
     }
 
     public AutomationPracticeFormPage chooseGender(String gender){
-        $("#genterWrapper").$(byText(gender)).click();
+        genderRadioButton.click(gender);
 
         return this;
     }
@@ -101,7 +106,7 @@ public class AutomationPracticeFormPage {
     }
 
     public void submitForm (){
-        $("#submit").click();
+        submit.click();
     }
 
     public AutomationPracticeFormPage checkResults(String key, String value) {
